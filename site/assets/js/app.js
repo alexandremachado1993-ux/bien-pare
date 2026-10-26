@@ -270,7 +270,8 @@ function renderFeedback() {
   }
 
   const emailField = form.querySelector('[data-email-field]');
-  form.elements.contactOk.addEventListener('change', (e) => {
+  if (!CONFIG.collectEmail) form.querySelector('[data-contact-block]').remove();
+  form.elements.contactOk?.addEventListener('change', (e) => {
     emailField.hidden = !e.target.checked;
     form.elements.email.required = e.target.checked;
   });
@@ -284,8 +285,8 @@ function renderFeedback() {
       priceOpinion: form.elements.priceOpinion.value,
       hesitation: form.elements.hesitation.value,
       wish: form.elements.wish.value,
-      contactOk: form.elements.contactOk.checked,
-      email: form.elements.email.value,
+      contactOk: Boolean(CONFIG.collectEmail && form.elements.contactOk?.checked),
+      email: CONFIG.collectEmail ? form.elements.email.value : '',
     };
     if (form.elements.website.value) return; // champ piège anti-robots
     const { ok, errors, payload } = validateFeedback(data, PRODUCTS.map((p) => p.id));
@@ -306,7 +307,7 @@ function renderFeedback() {
       const p = getProduct(payload.product_interest);
       tracker.track('feedback_submitted', p ? { productId: p.id, universe: p.universe, productType: p.type } : {});
       form.reset();
-      emailField.hidden = true;
+      if (emailField?.isConnected) emailField.hidden = true;
       announce(status, 'Merci ! Votre avis a bien été enregistré.', 'success');
     } else {
       announce(status, 'Votre avis n’a pas pu être enregistré (problème de connexion ou de service). Vous pouvez réessayer dans quelques instants.', 'error');

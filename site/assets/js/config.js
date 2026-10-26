@@ -10,6 +10,9 @@ export const CONFIG = {
   supabaseAnonKey: 'sb_publishable_eEGZ0b8IM3eL8I4H5tA52w_PQrmeslb',
   // Lien de paiement de l'offre numérique (ex. page Payhip). Vide = vente non active.
   digitalCheckoutUrl: '',
+  // Démonstration : pas de collecte d'e-mail tant que le responsable du traitement
+  // n'est pas identifié dans les mentions légales (RGPD, art. 13).
+  collectEmail: false,
   // Identifiant de la période de test, à changer à chaque modification d'offre (voir EXPERIMENT_LOG.md).
   experimentPeriod: 'P1-2026-11',
 };

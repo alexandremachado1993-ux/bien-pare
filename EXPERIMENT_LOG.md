@@ -18,8 +18,9 @@ Règle : ne pas modifier prix, textes ou produits pendant une période. Toute mo
   | Téléchargements de l'aperçu gratuit | ≥ 20 |
   | Clics « Ce produit m'intéresse » sur le pack | ≥ 10 |
   | Avis citant le pack | ≥ 8, dont ≥ 60 % « prix acceptable » ou « très abordable » |
-  | Inscriptions e-mail (avec consentement) | ≥ 5 |
+  | Inscriptions e-mail (avec consentement) | ≥ 5 — **suspendu pendant la démonstration** (aucun e-mail recueilli) |
 
+  - Pendant la démonstration, la règle porte sur 4 signaux : **go** = au moins 3 sur 4, **prolonger** = 2, **revoir** = 0 ou 1.
   - **Go** (au moins 4 signaux sur 5 atteints) : demande de SIRET, compte Payhip, CGV, puis ouverture de la vente.
   - **Prolonger de 2 semaines** (2 ou 3 signaux) : ajuster une seule chose (texte ou canal de diffusion), en ouvrant une nouvelle période.
   - **Revoir ou abandonner** (0 ou 1 signal) : changer d'offre ou de prix, ou basculer sur le carnet automobile.

@@ -161,7 +161,7 @@ test('formulaire sans stockage configuré : envoi désactivé et message honnêt
 async function withFakeStorage(page, received, { fail = false } = {}) {
   await page.route('**/assets/js/config.js', (route) => route.fulfill({
     contentType: 'text/javascript',
-    body: `export const CONFIG = { siteName: 'Bien Paré', supabaseUrl: 'https://fake.supabase.test', supabaseAnonKey: 'public-test-key', digitalCheckoutUrl: '', experimentPeriod: 'TEST' };
+    body: `export const CONFIG = { siteName: 'Bien Paré', supabaseUrl: 'https://fake.supabase.test', supabaseAnonKey: 'public-test-key', digitalCheckoutUrl: '', collectEmail: true, experimentPeriod: 'TEST' };
            export const isStorageConfigured = () => true;`,
   }));
   await page.route('https://fake.supabase.test/rest/v1/**', (route) => {
@@ -218,6 +218,28 @@ test('formulaire avec stockage : validation, envoi, e-mail seulement avec consen
   const evts = received.filter((r) => r.table === 'events').map((r) => r.body);
   assert.equal(evts.filter((e) => e.event === 'feedback_submitted').length, 2);
   assert.ok(evts.every((e) => !JSON.stringify(e).includes('@')), 'aucun e-mail dans les événements');
+  assert.deepEqual(errors, []);
+  await context.close();
+});
+
+test('mode démonstration : aucune case ni champ e-mail, avis anonyme envoyé', async () => {
+  const sent = [];
+  const { page, context, errors } = await open('retours.html', {
+    setup: (p) => p.route('https://*.supabase.co/rest/v1/**', (route) => {
+      sent.push({ table: new URL(route.request().url()).pathname.split('/').pop(), body: route.request().postDataJSON() });
+      return route.fulfill({ status: 201, body: '' });
+    }),
+  });
+  assert.equal(await page.locator('#email').count(), 0);
+  assert.equal(await page.locator('[name="contactOk"]').count(), 0);
+  await page.selectOption('#productInterest', 'auto-sac-cable-ve');
+  await page.getByLabel('Acceptable').check();
+  await page.getByRole('button', { name: 'Envoyer mon avis' }).click();
+  await page.locator('[data-form-status][data-tone="success"]').waitFor();
+  const fb = sent.filter((r) => r.table === 'feedback');
+  assert.equal(fb.length, 1);
+  assert.equal(fb[0].body.email, null);
+  assert.equal(fb[0].body.contact_ok, false);
   assert.deepEqual(errors, []);
   await context.close();
 });

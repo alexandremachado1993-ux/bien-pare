@@ -60,7 +60,10 @@ for (const line of envExample.split('\n')) {
 if (files.some((f) => /(^|\/)\.env$/.test(f))) problems.push('.env présent dans le dépôt (doit rester hors Git)');
 
 const legal = await readFile(join(ROOT, 'site/mentions-legales.html'), 'utf8');
-if (legal.includes('À COMPLÉTER')) warnings.push('mentions-legales.html contient encore « À COMPLÉTER » : à remplir avant toute publication.');
+if (legal.includes('data-pending-legal')) warnings.push('Mentions légales en mode démonstration : éditeur non nommé. Obligatoire avant toute collecte d’e-mail ou vente.');
+const cfg = await readFile(join(ROOT, 'site/assets/js/config.js'), 'utf8');
+if (legal.includes('data-pending-legal') && /collectEmail:\s*true/.test(cfg)) problems.push('collectEmail activé alors que le responsable du traitement n’est pas identifié');
+if (legal.includes('data-pending-legal') && /digitalCheckoutUrl:\s*'https/.test(cfg)) problems.push('Vente activée alors que les mentions légales sont en mode démonstration');
 
 const config = await readFile(join(ROOT, 'site/assets/js/config.js'), 'utf8');
 if (/supabaseUrl:\s*''/.test(config)) warnings.push('Stockage non configuré : formulaire et mesure d’audience inactifs (comportement attendu tant que Supabase n’est pas branché).');
