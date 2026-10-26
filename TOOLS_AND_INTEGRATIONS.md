@@ -5,11 +5,11 @@
 | Outil | État | Usage | Coût | Permissions |
 |---|---|---|---|---|
 | Node 22, npm, Git, Playwright + Chromium | Disponibles | Développement, tests navigateur, PDF | 0 € | Locales |
-| Connecteur Supabase (claude.ai) | Connecté ; 1 projet `ac-sat-campagne` (**à ne pas toucher**) | Stockage des événements et avis | Offre gratuite : 2 projets actifs, pause après 7 jours sans activité | Création du projet **refusée par le garde-fou, en attente de votre accord** |
+| Connecteur Supabase (claude.ai) | Connecté ; projet **`bien-pare`** (isyukotihbribamfshtc, Paris) créé le 26/10 ; `ac-sat-campagne` non touché | Stockage des événements et avis | 0 € (offre gratuite, 2 projets actifs sur 2 utilisés ; pause après 7 jours sans activité) | Visiteurs : insertion seule (RLS) ; aucune alerte de sécurité Supabase |
 | Connecteur Google Drive | Connecté | Copie de sauvegarde du produit privé (option) | 0 € | Non utilisé sans accord |
-| GitHub | Jeton du conteneur **invalide** ; seuls 2 dépôts existants sont visibles (non modifiés) | Sauvegarde et hébergement Pages | 0 € (dépôt public) | **Dépôt à créer par vous** |
+| GitHub | Dépôts `bien-pare` (public) et `bien-pare-produits` (privé) créés par l'utilisateur. `bien-pare` : lecture OK, **envoi refusé (403)**. `bien-pare-produits` : **inaccessible** | Sauvegarde et hébergement Pages | 0 € | **Installer l'application GitHub « Claude » sur ces deux dépôts** |
 | Recherche web | Fonctionne (résumés de pages) | Études | 0 € | — |
-| Accès direct aux sites (Amazon, eBay, Alibaba, CJ, gouv.fr…) | **Bloqué** par le réseau de l'environnement | Relevés de prix de première main | — | À autoriser dans les paramètres réseau de l'environnement |
+| Accès direct aux sites (Amazon, eBay, Alibaba, CJ, gouv.fr, *.supabase.co…) | **Bloqué** par le réseau de l'environnement | Relevés de prix de première main | — | À autoriser dans les paramètres réseau de l'environnement |
 | Shopify AI Toolkit / Dev MCP | Non installé (shopify.dev bloqué) | Inutile avant une vraie boutique | 0 € | — |
 | Serveurs MCP de plugins (GitHub, Figma, Amplitude, Ahrefs…) | Échec de connexion (proxy 403) | Non nécessaires | — | — |
 

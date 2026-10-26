@@ -31,6 +31,8 @@ async function open(url, { viewport = { width: 1280, height: 800 }, setup } = {}
   const errors = [];
   page.on('pageerror', (e) => errors.push(String(e)));
   page.on('console', (m) => { if (m.type() === 'error') errors.push(m.text()); });
+  // Les tests n'écrivent jamais dans la vraie base : toute requête Supabase est interceptée.
+  await page.route('https://*.supabase.co/**', (route) => route.fulfill({ status: 201, body: '' }));
   if (setup) await setup(page);
   await page.goto(base + url);
   await page.waitForLoadState('networkidle');
@@ -142,7 +144,13 @@ test('produit inexistant : état vide propre', async () => {
 });
 
 test('formulaire sans stockage configuré : envoi désactivé et message honnête', async () => {
-  const { page, context } = await open('retours.html');
+  const { page, context } = await open('retours.html', {
+    setup: (p) => p.route('**/assets/js/config.js', (route) => route.fulfill({
+      contentType: 'text/javascript',
+      body: `export const CONFIG = { siteName: 'Bien Paré', supabaseUrl: '', supabaseAnonKey: '', digitalCheckoutUrl: '', experimentPeriod: 'TEST' };
+             export const isStorageConfigured = () => false;`,
+    })),
+  });
   assert.equal(await page.getByRole('button', { name: 'Envoyer mon avis' }).isDisabled(), true);
   assert.match(await page.locator('[data-form-status]').innerText(), /pas encore relié/);
   assert.match(await page.locator('[data-storage-status]').innerText(), /non active/);

@@ -9,10 +9,10 @@
 | Classement et choix des produits | Fait |
 | Site prototype (10 pages, 2 univers, 4 produits, sélection simulée, formulaire, tableau de bord) | Fait et testé localement |
 | Pack Concours Serein (PDF 10 pages + aperçu gratuit 2 pages) | Fait (à relire par vous) |
-| Sauvegarde GitHub | **Bloquée** : dépôt à créer par vous |
-| Stockage des avis et événements | **Bloqué** : accord Supabase requis |
+| Sauvegarde GitHub | **Bloquée** : dépôts créés, mais l'application GitHub Claude doit y avoir accès |
+| Stockage des avis et événements | Fait : projet Supabase `bien-pare`, insertion seule |
 | Mise en ligne | Après GitHub, mentions légales et stockage |
-| Vente du pack | Après SIRET, compte Payhip, CGV et médiateur |
+| Vente du pack | Seulement si la règle de décision est atteinte (EXPERIMENT_LOG.md), puis SIRET, Payhip, CGV et médiateur |
 | Vente physique | **Pas avant validation** (SIRET, REP, fournisseur, échantillon) |
 
 ## Calendrier jusqu'au 1er novembre

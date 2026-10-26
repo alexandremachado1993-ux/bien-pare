@@ -11,4 +11,8 @@
 | 2026-10-26 | Mesure sans cookie, identifiant de session aléatoire, `traffic_mode` sur chaque événement | Minimiser les données (RGPD), séparer tests et visiteurs | — |
 | 2026-10-26 | Formulaire désactivé tant qu'aucun stockage n'est branché | Ne jamais laisser croire qu'une réponse est enregistrée | — |
 | 2026-10-26 | Source du produit payant hors du dépôt public | Le dépôt public (GitHub Pages gratuit) exposerait le produit | Dépôt privé séparé |
-| 2026-10-26 | Création du projet Supabase refusée par le garde-fou de permissions | Ressource du compte : accord explicite requis | Une fois l'accord donné, voir README |
+| 2026-10-26 | Création du projet Supabase refusée par le garde-fou de permissions | Ressource du compte : accord explicite requis | — |
+| 2026-10-26 | Accord reçu : projet Supabase `bien-pare` (isyukotihbribamfshtc, eu-west-3) créé, schéma appliqué, clé publishable branchée | Stockage réel des avis et événements | Mettre `supabaseUrl` à '' dans config.js (le site redevient inactif) ou mettre le projet en pause |
+| 2026-10-26 | Vente du pack conditionnée à une règle de décision chiffrée (EXPERIMENT_LOG.md) | Choix de l'utilisateur : voir la demande avant de vendre | — |
+| 2026-10-26 | Mentions légales : éditeur particulier non professionnel (LCEN art. 6-III-2), nom et e-mail dédié à fournir | Le RGPD impose d'identifier le responsable du traitement ; l'adresse personnelle n'est pas publiée | Passage aux mentions complètes de vendeur professionnel avant toute vente |
+| 2026-10-26 | Nom « Bien Paré » conservé comme nom de travail, **non vérifié à l'INPI** | Décision de l'utilisateur | À vérifier avant tout dépôt de marque ou ouverture de la vente |

@@ -22,9 +22,20 @@
 | Date | check | unitaires | navigateur | Remarques |
 |---|---|---|---|---|
 | 2026-10-26 | 0 problème, 2 avertissements attendus (mentions à compléter, stockage non branché) | 17/17 | 11/11 | 1 échec initial dû au test (champ e-mail masqué), test corrigé |
+| 2026-10-26 (2) | 0 problème, 1 avertissement (mentions à compléter) | 17/17 | 11/11 | Stockage branché ; les tests interceptent toute requête vers Supabase (aucune écriture en base) |
+
+## Sécurité de la base (testée en SQL dans le rôle `anon`, 26/10)
+- Insertion d'un événement et d'un avis : **acceptée** (dans une transaction annulée)
+- Lecture de `events` : **refusée** (permission denied)
+- `purchase_completed` : **refusé** (contrainte)
+- E-mail sans consentement : **refusé** (contrainte `email_requires_consent`)
+- Suppression : **non testée** (confirmation demandée par le serveur restée sans réponse) ; bloquée en principe par `revoke delete`
+- Analyse de sécurité Supabase : aucune alerte
+- Test HTTP réel depuis le navigateur : **à faire** une fois le site publié (le conteneur ne peut pas joindre *.supabase.co)
 
 ## Contrôles manuels avant publication
 - [ ] Mentions légales complétées (éditeur)
-- [ ] Stockage branché, avis de test envoyé avec `?mode=test` et visible dans Supabase
+- [x] Stockage branché
+- [ ] Avis de test envoyé depuis le site publié avec `?mode=test`, visible dans Supabase (Table editor)
 - [ ] Vérification sur un vrai téléphone
 - [ ] Aperçu PDF relu et imprimé

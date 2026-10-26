@@ -47,7 +47,6 @@ export async function submitFeedback(payload, { config, isStorageConfigured, tra
       headers: {
         'Content-Type': 'application/json',
         apikey: config.supabaseAnonKey,
-        Authorization: `Bearer ${config.supabaseAnonKey}`,
         Prefer: 'return=minimal',
       },
       body: JSON.stringify({ ...payload, traffic_mode: trafficMode, period }),

@@ -117,7 +117,6 @@ export function createTracker({ config, isStorageConfigured }) {
         headers: {
           'Content-Type': 'application/json',
           apikey: config.supabaseAnonKey,
-          Authorization: `Bearer ${config.supabaseAnonKey}`,
           Prefer: 'return=minimal',
         },
         body: JSON.stringify(evt),
