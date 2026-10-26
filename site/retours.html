@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Donner mon avis — Bien Paré</title>
+  <meta name="description" content="5 questions, 1 minute : aidez-nous à choisir les produits utiles.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%2322303c'/%3E%3Cpath d='M9 17l5 5 9-11' stroke='white' stroke-width='3' fill='none' stroke-linecap='round'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <script type="module" src="assets/js/app.js"></script>
+</head>
+<body data-page="feedback">
+<a class="skip-link" href="#main">Aller au contenu</a>
+<main id="main" class="container prose">
+  <h1>Donner mon avis</h1>
+  <p class="lead">5 questions, environ 1 minute. Merci de ne pas indiquer d’informations personnelles dans les réponses libres.</p>
+  <p class="notice" data-form-status role="status" hidden></p>
+  <form class="form" data-feedback-form novalidate>
+    <div class="field">
+      <label for="productInterest">1. Quel produit vous intéresse le plus ?</label>
+      <select id="productInterest" name="productInterest" required aria-describedby="err-productInterest">
+        <option value="">Choisir…</option>
+        <option value="aucun">Aucun pour l’instant</option>
+      </select>
+      <span class="field-error" id="err-productInterest" data-error-for="productInterest"></span>
+    </div>
+    <div class="field">
+      <label for="problem">2. Quel problème cherchez-vous à résoudre ? <span class="hint">Facultatif — 500 caractères maximum</span></label>
+      <textarea id="problem" name="problem" maxlength="500"></textarea>
+    </div>
+    <fieldset class="field" aria-describedby="err-priceOpinion">
+      <legend>3. Le prix de test indiqué vous paraît-il…</legend>
+      <label class="choice"><input type="radio" name="priceOpinion" value="acceptable"> Acceptable</label>
+      <label class="choice"><input type="radio" name="priceOpinion" value="trop_cher"> Trop cher</label>
+      <label class="choice"><input type="radio" name="priceOpinion" value="tres_abordable"> Très abordable</label>
+      <label class="choice"><input type="radio" name="priceOpinion" value="ne_sait_pas"> Je ne sais pas</label>
+      <span class="field-error" id="err-priceOpinion" data-error-for="priceOpinion"></span>
+    </fieldset>
+    <div class="field">
+      <label for="hesitation">4. Qu’est-ce qui vous ferait hésiter à acheter ? <span class="hint">Facultatif</span></label>
+      <textarea id="hesitation" name="hesitation" maxlength="500"></textarea>
+    </div>
+    <div class="field">
+      <label for="wish">5. Quel produit aimeriez-vous voir ajouté ? <span class="hint">Facultatif</span></label>
+      <input type="text" id="wish" name="wish" maxlength="200">
+    </div>
+    <div class="field">
+      <label class="choice"><input type="checkbox" name="contactOk"> Je souhaite être prévenu(e) par e-mail si l’offre devient disponible (facultatif)</label>
+      <div data-email-field hidden>
+        <label for="email">Adresse e-mail</label>
+        <span class="hint">Utilisée uniquement pour vous prévenir de l’ouverture de l’offre, puis supprimée. Vous pouvez demander sa suppression à tout moment (voir <a href="confidentialite.html">Confidentialité</a>).</span>
+        <input type="email" id="email" name="email" autocomplete="email" maxlength="254" aria-describedby="err-email">
+        <span class="field-error" id="err-email" data-error-for="email"></span>
+      </div>
+    </div>
+    <div class="hp" aria-hidden="true"><label>Ne pas remplir <input type="text" name="website" tabindex="-1" autocomplete="off"></label></div>
+    <button type="submit" class="btn btn-primary">Envoyer mon avis</button>
+  </form>
+</main>
+</body>
+</html>

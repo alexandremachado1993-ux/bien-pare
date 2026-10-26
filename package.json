@@ -1,0 +1,17 @@
+{
+  "name": "bien-pare-ecom-validation",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Prototype d'étude e-commerce Automobile + Équitation (sans paiement).",
+  "type": "module",
+  "scripts": {
+    "serve": "node scripts/serve.mjs 4173",
+    "test": "node --test \"tests/unit/*.test.mjs\"",
+    "test:e2e": "node --test --test-concurrency=1 \"tests/e2e/*.test.cjs\"",
+    "check": "node scripts/check.mjs",
+    "build:pdf": "node scripts/build-pdf.cjs",
+    "margins": "node scripts/margins.mjs",
+    "verify": "npm run check && npm test && npm run test:e2e"
+  },
+  "engines": { "node": ">=20" }
+}

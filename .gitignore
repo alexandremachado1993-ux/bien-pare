@@ -1,0 +1,8 @@
+product-private/
+node_modules/
+.env
+.env.*
+!.env.example
+test-results/
+reports/screenshots/
+*.log

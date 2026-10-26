@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <title>Tableau de bord — Bien Paré</title>
+  <link rel="stylesheet" href="assets/css/style.css">
+  <script type="module" src="assets/js/dashboard.js"></script>
+</head>
+<body>
+<main class="container prose" style="max-width:1000px">
+  <h1>Tableau de bord du test</h1>
+  <p class="lead">Chargez l’export CSV de la table <code>events</code>. Le fichier est analysé dans votre navigateur et n’est envoyé nulle part.</p>
+  <p class="notice">Seuls les événements <code>traffic_mode = visitor</code> sont comptés. Les tests et démonstrations sont exclus et affichés à part. Un panier simulé n’est jamais une vente : les commandes payées restent à 0 tant qu’aucune vente réelle n’existe.</p>
+  <label class="btn btn-secondary">Choisir un fichier CSV <input type="file" accept=".csv,text/csv" data-csv hidden></label>
+  <p class="notice" data-status role="status" hidden></p>
+  <div data-output></div>
+</main>
+</body>
+</html>
