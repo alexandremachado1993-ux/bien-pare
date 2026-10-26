@@ -1,7 +1,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import {
-  buildEvent, resolveTrafficMode, referrerDomain, utmSource, EVENT_NAMES,
+  buildEvent, resolveTrafficMode, referrerDomain, utmSource, EVENT_NAMES, rememberOwnerMode,
 } from '../../site/assets/js/analytics.js';
 
 test('purchase_completed est refusé dans le prototype', () => {
@@ -53,4 +53,19 @@ test('utm_source filtré', () => {
   assert.equal(utmSource('?utm_source=Facebook_Groupe'), 'facebook_groupe');
   assert.equal(utmSource('?utm_source=<script>'), null);
   assert.equal(utmSource(''), null);
+});
+
+test('mode propriétaire : mémorisé seulement via ?mode=test|demo, effacé par ?mode=visitor', () => {
+  const mem = new Map();
+  const storage = { getItem: (k) => mem.get(k) ?? null, setItem: (k, v) => mem.set(k, v), removeItem: (k) => mem.delete(k) };
+  assert.equal(rememberOwnerMode('', storage), null, 'visiteur ordinaire : rien d’écrit');
+  assert.equal(mem.size, 0);
+  assert.equal(rememberOwnerMode('?mode=admin', storage), null);
+  assert.equal(rememberOwnerMode('?mode=test', storage), 'test');
+  assert.equal(rememberOwnerMode('', storage), 'test', 'reste actif sur les pages suivantes');
+  assert.equal(resolveTrafficMode({ stored: rememberOwnerMode('', storage) }), 'test');
+  assert.equal(rememberOwnerMode('?mode=visitor', storage), null);
+  assert.equal(mem.size, 0);
+  const broken = { getItem() { throw new Error('x'); }, setItem() { throw new Error('x'); }, removeItem() {} };
+  assert.equal(rememberOwnerMode('?mode=test', broken), null, 'stockage bloqué : pas de plantage');
 });

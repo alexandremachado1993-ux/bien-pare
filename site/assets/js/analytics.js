@@ -77,6 +77,22 @@ function randomId() {
   return `s-${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 10)}`;
 }
 
+// Mode « propriétaire » mémorisé sur l'appareil (localStorage) : écrit UNIQUEMENT quand
+// l'adresse contient ?mode=test ou ?mode=demo ; ?mode=visitor l'efface. Un visiteur
+// ordinaire n'a donc jamais rien d'enregistré à ce titre.
+const OWNER_KEY = 'bp_owner_mode';
+
+export function rememberOwnerMode(search, storage) {
+  const fromUrl = new URLSearchParams(search).get('mode');
+  try {
+    if (fromUrl === 'test' || fromUrl === 'demo') storage.setItem(OWNER_KEY, fromUrl);
+    else if (fromUrl === 'visitor') storage.removeItem(OWNER_KEY);
+    return storage.getItem(OWNER_KEY);
+  } catch {
+    return null;
+  }
+}
+
 function safeSession(key, value) {
   try {
     if (value === undefined) return sessionStorage.getItem(key);
@@ -92,12 +108,14 @@ export function createTracker({ config, isStorageConfigured }) {
   const log = [];
   let sessionId = safeSession('bp_session');
   if (!sessionId) sessionId = safeSession('bp_session', randomId());
+  let localStore = null;
+  try { localStore = window.localStorage; } catch { /* indisponible */ }
+  const ownerMode = localStore ? rememberOwnerMode(location.search, localStore) : null;
   const trafficMode = resolveTrafficMode({
     search: location.search,
     webdriver: navigator.webdriver === true,
-    stored: safeSession('bp_mode'),
+    stored: ownerMode,
   });
-  safeSession('bp_mode', trafficMode);
 
   const context = () => ({
     sessionId,
@@ -142,5 +160,5 @@ export function createTracker({ config, isStorageConfigured }) {
   // Exposé pour les tests automatisés et le débogage (lecture seule).
   Object.defineProperty(window, '__bpEvents', { get: () => log.slice(), configurable: true });
 
-  return { track, trafficMode, sessionId };
+  return { track, trafficMode, sessionId, ownerMode };
 }

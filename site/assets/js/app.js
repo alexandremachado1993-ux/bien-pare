@@ -63,11 +63,18 @@ function renderChrome() {
         <a href="mentions-legales.html">Mentions légales</a>
       </nav>
       <p class="muted" data-storage-status></p>
+      <p class="owner-mode" data-owner-mode hidden></p>
     </div>`;
   document.body.append(footer);
   footer.querySelector('[data-storage-status]').textContent = isStorageConfigured()
     ? 'Mesure d’audience anonyme active, sans cookie.'
     : 'Mesure d’audience non active : aucune donnée n’est enregistrée pour le moment.';
+
+  if (tracker.ownerMode) {
+    const el = footer.querySelector('[data-owner-mode]');
+    el.hidden = false;
+    el.innerHTML = `Mode <strong>${esc(tracker.ownerMode)}</strong> actif sur cet appareil : vos visites ne sont pas comptées comme visiteurs. <a href="?mode=visitor">Désactiver</a>`;
+  }
 
   const dialog = document.createElement('dialog');
   dialog.className = 'cart-dialog';

@@ -135,6 +135,24 @@ test('produit numérique : vente fermée, aperçu PDF téléchargeable et mesur�
   await context.close();
 });
 
+test('mode propriétaire : persiste d’une page à l’autre et se désactive', async () => {
+  const { page, context } = await open('index.html?mode=demo');
+  assert.equal(await page.evaluate(() => localStorage.getItem('bp_owner_mode')), 'demo');
+  assert.match(await page.locator('[data-owner-mode]').innerText(), /Mode demo actif/);
+  await page.goto(base + 'equitation.html');
+  assert.equal(await page.locator('[data-owner-mode]').isVisible(), true, 'toujours actif sans paramètre');
+  await page.goto(base + 'index.html?mode=visitor');
+  assert.equal(await page.evaluate(() => localStorage.getItem('bp_owner_mode')), null);
+  assert.equal(await page.locator('[data-owner-mode]').isHidden(), true);
+  await context.close();
+});
+
+test('visiteur ordinaire : aucun mode propriétaire enregistré', async () => {
+  const { page, context } = await open('index.html');
+  assert.equal(await page.evaluate(() => localStorage.length), 0);
+  await context.close();
+});
+
 test('produit inexistant : état vide propre', async () => {
   const { page, context, errors } = await open('produit.html?id=nexiste-pas');
   assert.match(await page.locator('h1').innerText(), /introuvable/);
