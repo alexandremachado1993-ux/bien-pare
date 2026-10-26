@@ -7,7 +7,7 @@
 | Node 22, npm, Git, Playwright + Chromium | Disponibles | Développement, tests navigateur, PDF | 0 € | Locales |
 | Connecteur Supabase (claude.ai) | Connecté ; projet **`bien-pare`** (isyukotihbribamfshtc, Paris) créé le 26/10 ; `ac-sat-campagne` non touché | Stockage des événements et avis | 0 € (offre gratuite, 2 projets actifs sur 2 utilisés ; pause après 7 jours sans activité) | Visiteurs : insertion seule (RLS) ; aucune alerte de sécurité Supabase |
 | Connecteur Google Drive | Connecté | Copie de sauvegarde du produit privé (option) | 0 € | Non utilisé sans accord |
-| GitHub | Dépôts `bien-pare` (public) et `bien-pare-produits` (privé) créés par l'utilisateur. `bien-pare` : lecture OK, **envoi refusé (403)**. `bien-pare-produits` : **inaccessible** | Sauvegarde et hébergement Pages | 0 € | **Installer l'application GitHub « Claude » sur ces deux dépôts** |
+| GitHub | Dépôts `bien-pare` (public) et `bien-pare-produits` (privé) créés par l'utilisateur. Application GitHub Claude installée par l'utilisateur sur les deux dépôts ; envois vérifiés le 26/10 | Sauvegarde, CI (tests) et GitHub Pages | 0 € (dépôt public) | Écriture limitée à ces deux dépôts |
 | Recherche web | Fonctionne (résumés de pages) | Études | 0 € | — |
 | Accès direct aux sites (Amazon, eBay, Alibaba, CJ, gouv.fr, *.supabase.co…) | **Bloqué** par le réseau de l'environnement | Relevés de prix de première main | — | À autoriser dans les paramètres réseau de l'environnement |
 | Shopify AI Toolkit / Dev MCP | Non installé (shopify.dev bloqué) | Inutile avant une vraie boutique | 0 € | — |
